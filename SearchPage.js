@@ -89,6 +89,7 @@ export default class SearchPage extends Component<Props> {
 
   _executeQuery = (query) => {
     console.log(query);
+    
     this.setState({ isLoading: true });
 
     fetch(query)

@@ -11,8 +11,10 @@ import {
 } from 'react-native';
 
 class ListItem extends React.PureComponent {
+    
     _onPress = () => {
       this.props.onPressItem(this.props.index);
+      //this.props.navigation.navigate('Details', {item: this.props.item});
     }
   
     render() {
@@ -57,14 +59,23 @@ export default class SearchResults extends Component<Props> {
   
   _onPressItem = (index) => {
     console.log("Pressed row: "+index);
+
+    const { params } = this.props.navigation.state;
+    
+    var item = params.listings[index];
+
+    console.log("item: " + item);
+    
+    this.props.navigation.navigate('Details', {item: item});
   };
   
 
   render() {
     const { params } = this.props.navigation.state;
+    
     return (
       <FlatList
-        data={b.listings}
+        data={params.listings}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
       />
