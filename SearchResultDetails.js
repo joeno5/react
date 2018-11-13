@@ -1,11 +1,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { connect } from 'react-redux';
 
 type Props = {};
 
-export default class SearchResultDetails extends Component<Props> {
+class ConnectedSearchResultDetails extends Component<Props> {
     static navigationOptions = {
         title: ' Property Details'
     }
@@ -21,19 +22,37 @@ export default class SearchResultDetails extends Component<Props> {
     render() {
         console.log('SearchResultDetails.render: ');
         const { params } = this.props.navigation.state;
-        var item = params.item;
-        console.log('item: ' + item);
+        var index = params.index;
+        console.log('index: ' + index);
+        var item = this.props.listings[index];
+        const price = item.price_formatted.split(' ')[0];
+
         return (
             <View style={styles.container}>
+                <Image style={styles.thumb} source={{ uri: item.img_url }} />
                 <Text style={styles.description}>
                     {item.title}
                 </Text>
+                <Text style={styles.price}>{price}</Text>
             </View>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    // map listings from state to props
+    const {listings} = state;
+    return {listings};
+};
+
+export default connect(mapStateToProps)(ConnectedSearchResultDetails);
+
 const styles = StyleSheet.create({
+    thumb: {
+        width: 320,
+        height: 320,
+        marginRight: 10
+      },
     description: {
       marginBottom: 20,
       fontSize: 18,
@@ -45,5 +64,10 @@ const styles = StyleSheet.create({
       marginTop: 65,
       alignItems: 'center'
     },
+    price: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#48BBEC'
+    },
              
-  });
+});

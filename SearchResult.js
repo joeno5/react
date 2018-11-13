@@ -9,6 +9,7 @@ import {
   FlatList,
   Text,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 class ListItem extends React.PureComponent {
     
@@ -42,7 +43,7 @@ class ListItem extends React.PureComponent {
   
 type Props = {};
 
-export default class SearchResults extends Component<Props> {
+class ConnectedSearchResults extends Component<Props> {
   static navigationOptions = {
     title: 'Results',
   };
@@ -60,28 +61,43 @@ export default class SearchResults extends Component<Props> {
   _onPressItem = (index) => {
     console.log("Pressed row: "+index);
 
-    const { params } = this.props.navigation.state;
-    
-    var item = params.listings[index];
+    const {navigate} = this.props.navigation;
 
-    console.log("item: " + item);
-    
-    this.props.navigation.navigate('Details', {item: item});
+    // change navigation to 'Details' page and pass {index: index} object to params
+    navigate('Details', {index});
   };
   
 
   render() {
-    const { params } = this.props.navigation.state;
+    // get params from react navigation state
+    //const { params } = this.props.navigation.state;
+    
+    console.log(JSON.stringify(this.props.listings));
     
     return (
       <FlatList
-        data={params.listings}
+        //data={params.listings}
+        data={this.props.listings}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
       />
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  console.log('state:' + JSON.stringify(state));
+  
+  const {listings} = state;
+  return {listings};
+
+  // equivalent to below statements
+  // return {
+  //   listings: state.listings
+  // };
+};
+
+export default connect(mapStateToProps)(ConnectedSearchResults);
 
 const styles = StyleSheet.create({
     thumb: {
@@ -109,5 +125,5 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       padding: 10
     },
-  });
+});
   

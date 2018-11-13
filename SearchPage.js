@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-
+import { connect } from 'react-redux';
+import { addListings } from "./actions/Listings";
 
 function urlForQueryAndPage(key, value, pageNumber) {
     const data = {
@@ -33,7 +34,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
 
 type Props = {};
 
-export default class SearchPage extends Component<Props> {
+class ConnectedSearchPage extends Component<Props> {
   static navigationOptions = {
     title: 'Property Finder',
   };
@@ -111,14 +112,29 @@ export default class SearchPage extends Component<Props> {
     this.setState({ isLoading: false , message: '' });
 
     if (response.application_response_code.substr(0, 1) === '1') {
-      this.props.navigation.navigate('Results', {listings: response.listings});
-
-    } else {
+      console.log('response: ' + JSON.stringify(response.listings));
+      // invoke reduex dispatch
+      this.props.doAddListings(response.listings);
+      
+      // change navigation to 'Result' page
+      const { navigate } = this.props.navigation;
+      navigate('Results');
+    } 
+    else {
       this.setState({ message: 'Location not recognized; please try again.'});
     }
   };
 }
- 
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // map dispatch to props named 'doAddListings'
+    doAddListings: listings => dispatch(addListings(listings))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ConnectedSearchPage);
+
 const styles = StyleSheet.create({
     description: {
       marginBottom: 20,
@@ -151,5 +167,5 @@ const styles = StyleSheet.create({
         width: 217,
         height: 138,
       },          
-  });
+});
   
