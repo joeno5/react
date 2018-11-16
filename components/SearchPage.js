@@ -11,7 +11,7 @@ import {
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addListings } from "./actions/Listings";
+import { addListings } from "../actions/Listings";
 
 function urlForQueryAndPage(key, value, pageNumber) {
     const data = {
@@ -79,7 +79,7 @@ class ConnectedSearchPage extends Component {
           title='Go'
         />
         </View>
-        <Image source={require('./resources/house.png')} style={styles.image}/>
+        <Image source={require('../resources/house.png')} style={styles.image}/>
         {spinner}
         <Text style={styles.description}>{this.state.message}</Text>
       </View>
