@@ -32,9 +32,11 @@ function urlForQueryAndPage(key, value, pageNumber) {
     return 'https://api.nestoria.co.uk/api?' + querystring;
 }
 
-type Props = {};
+class ConnectedSearchPage extends Component {
+  static defaultProps = {
+    foo: 42,
+  };
 
-class ConnectedSearchPage extends Component<Props> {
   static navigationOptions = {
     title: 'Property Finder',
   };
@@ -53,7 +55,9 @@ class ConnectedSearchPage extends Component<Props> {
     console.log('SearchPage.render');
     const spinner = this.state.isLoading ?
                     <ActivityIndicator size='large'/> : null;
-
+    
+    //console.log(this.props.navigation.getParam('searchString'));
+    
     return (
       <View style={styles.container}>
         <Text style={styles.description}>

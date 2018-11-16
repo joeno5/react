@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 
-type Props = {};
+// type Props = {};
 
-class ConnectedSearchResultDetails extends Component<Props> {
+class ConnectedSearchResultDetails extends Component {
     static navigationOptions = {
         title: ' Property Details'
     }

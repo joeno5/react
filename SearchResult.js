@@ -41,9 +41,9 @@ class ListItem extends React.PureComponent {
     }
 }
   
-type Props = {};
+// type Props = {};
 
-class ConnectedSearchResults extends Component<Props> {
+class ConnectedSearchResults extends Component {
   static navigationOptions = {
     title: 'Results',
   };
@@ -61,10 +61,10 @@ class ConnectedSearchResults extends Component<Props> {
   _onPressItem = (index) => {
     console.log("Pressed row: "+index);
 
-    const {navigate} = this.props.navigation;
+    const {push} = this.props.navigation;
 
     // change navigation to 'Details' page and pass {index: index} object to params
-    navigate('Details', {index});
+    push('Details', {index});
   };
   
 
