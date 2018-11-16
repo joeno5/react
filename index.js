@@ -3,17 +3,17 @@
 
 
 import React, { Component } from 'react';
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { name as appName } from './app.json';
-import { AppWithNavigation }from './App';
-import store from "./store/Store";
+import App from './App';
+import Store from "./store/Store";
 
 class ReduxApp extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <AppWithNavigation />
+            <Provider store={Store}>
+                <App />
             </Provider>
         );
     }

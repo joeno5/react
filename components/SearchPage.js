@@ -1,17 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  ActivityIndicator,
-  Image,
-} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, ActivityIndicator, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { addListings } from "../actions/Listings";
+import LogoTitle from "./LogoTitle.js";
 
 function urlForQueryAndPage(key, value, pageNumber) {
     const data = {
@@ -37,8 +30,16 @@ class ConnectedSearchPage extends Component {
     foo: 42,
   };
 
-  static navigationOptions = {
-    title: 'Property Finder',
+  // assign a function to navigationOptions for passing args by React Navigation in this static method
+  static navigationOptions = ({ navigation, navigationOptions, screenProps }) => {
+    // return {
+    //   title: 'Property Finder',
+    // }
+    console.log(JSON.stringify(screenProps));
+    
+    return {
+      headerTitle: <LogoTitle />,
+    }
   };
 
   constructor(props) {
@@ -61,10 +62,10 @@ class ConnectedSearchPage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.description}>
-          Search for houses to buy!
+          Property Finder
         </Text>
         <Text style={styles.description}>
-          Search by place-name or postcode.
+          Search houses by place-name or postcode.
         </Text>
         <View style={styles.flowRight}>
         <TextInput

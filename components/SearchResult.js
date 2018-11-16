@@ -10,6 +10,7 @@ import {
   Text,
 } from 'react-native';
 import { connect } from 'react-redux';
+import LogoTitle from './LogoTitle';
 
 class ListItem extends React.PureComponent {
     
@@ -45,7 +46,8 @@ class ListItem extends React.PureComponent {
 
 class ConnectedSearchResults extends Component {
   static navigationOptions = {
-    title: 'Results',
+    // title: 'Results',
+    headerTitle: <LogoTitle />,
   };
 
   _keyExtractor = (item, index) => index.toString();
@@ -75,7 +77,8 @@ class ConnectedSearchResults extends Component {
     console.log(JSON.stringify(this.props.listings));
     
     return (
-      <FlatList
+      <FlatList 
+        style
         //data={params.listings}
         data={this.props.listings}
         keyExtractor={this._keyExtractor}
