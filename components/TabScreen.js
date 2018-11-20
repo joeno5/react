@@ -1,7 +1,11 @@
+import React from 'react';
+import { createMaterialTopTabNavigator } from 'react-navigation';
+import About from './About';
+import Contact from './Contact';
 
-const Tabs = createMaterialTopTabNavigator({
+const TabScreen = createMaterialTopTabNavigator({
     About: About,
-    Contact: Contact
+    Contact: Contact,
 },
 {
     tabBarOptions: {
@@ -15,3 +19,5 @@ const Tabs = createMaterialTopTabNavigator({
         },
     }
 });
+
+export default TabScreen;

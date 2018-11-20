@@ -19,13 +19,18 @@ class DrawerScreen extends Component {
         <ScrollView>
           <View>
             <View style={styles.menuItem}>
-              <Text onPress={this.navigateToScreen('Home')}>
+              <Text onPress={this.navigateToScreen('HomeNavigation')}>
                 Home
               </Text>
             </View>
             <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('TabScreen')}>
+                Tab Page
+              </Text>
+            </View>
+            <View style={styles.menuItem}>
               <Text onPress={this.navigateToScreen('About')}>
-               About
+                About
               </Text>
             </View>
           </View>

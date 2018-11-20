@@ -5,7 +5,8 @@ import SearchPage from './components/SearchPage';
 import SearchResult from './components/SearchResult';
 import SearchResultDetails from './components/SearchResultDetails';
 import DrawerScreen from './components/DrawerScreen';
-import { About } from './components/About';
+import About from './components/About';
+import TabScreen from './components/TabScreen';
 
 const HomeNavigation = createStackNavigator(
   {
@@ -56,6 +57,7 @@ const HomeNavigation = createStackNavigator(
 
 const DrawerNavigator = createDrawerNavigator({
   HomeNavigation: { screen: HomeNavigation },
+  TabScreen: { screen: TabScreen},
   About: { screen: About },
 },{
   initialRouteName: 'HomeNavigation',
